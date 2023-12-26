@@ -156,7 +156,7 @@ class AuthenticationController extends Controller
                     // Send email if the request is successful
                     try {
                         Mail::to($user->Email)->send(new Authentic( $user->Token));
-                        return response()->json(['message' => 'Enter Your Verification Token'], 200);
+                        return response()->json(['message' => $user->UserId], 200);
                     } catch (\Exception $e) {
                       
                         return response()->json(['message' => 'Email Request Failed'], 400);
@@ -221,8 +221,13 @@ if($user->Token = $token && Carbon::now()<=$user->TokenExpire){
 
     $user -> save();
 
+    $c = [
+        "FullName" => $user->FullName,
+        "profilePic" => $user->profilePic,
+        "UserId" => $user->UserId,
+    ];
 
-    return response()->json(["message" => "Welcome Back " . $user->FullName], 200);
+    return response()->json(["message" => $c], 200);
 }
 else if( Carbon::now()>$user->TokenExpire){
     return response()->json(["message"=>"Your Token Has Expired"],400);
