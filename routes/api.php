@@ -10,6 +10,7 @@ use App\Http\Controllers\SiteContactController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\SiteSocialMediaController;
 
+use App\Http\Controllers\AuthenticationController;
 
 
 
@@ -40,8 +41,10 @@ Route::post("Social",[SiteSocialMediaController::class,'Social']);
 Route::get("getSocial",[SiteSocialMediaController::class,'GetMedia']);
 Route::delete("deleteMedia/{Id}",[SiteSocialMediaController::class,'DeleteMedia']);
 
-
-
+Route::post("SignUp",[AuthenticationController::class,'SignUp']);
+Route::post("LogIn",[AuthenticationController::class,'LogIn']);
+Route::post("VerifyToken/{userId}/{token}",[AuthenticationController::class,'VerifyToken']);
+Route::get("UnLock/{email}",[AuthenticationController::class,'Unlocker']);
 
 
 Route::post("sitePortfolio",[SitePortfolioController::class,'Portfolio']);
