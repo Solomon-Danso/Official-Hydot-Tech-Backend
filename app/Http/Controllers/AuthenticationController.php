@@ -11,42 +11,129 @@ use Carbon\Carbon;
 
 class AuthenticationController extends Controller
 {
-    function SignUp(Request $req){
-        $s = Authentication::firstOrNew();
-
-        $s->UserId = $this->IdGenerator();
-
-        if($req->filled("FullName")){
-            $s->FullName = $req->FullName;
+    function SignUp(Request $req, $token){
+       
+       
+        $user = Authentication::where('SToken', $token)->first();
+        if($user==null){
+            return response()->json(["message"=>"User does not exist"],400);
         }
+        
+        if($user->SToken = $token && Carbon::now()<=$user->STokenExpire){
+    
 
-        if($req->filled("Contact")){
-            $s->Contact = $req->Contact;
+            $user->UserId = $this->IdGenerator();
+
+            if($req->filled("FullName")){
+                $user->FullName = $req->FullName;
+            }
+    
+            if($req->filled("Contact")){
+                $user->Contact = $req->Contact;
+            }
+    
+            if($req->filled("Email")){
+                $user->Email = $req->Email;
+            }
+    
+            if($req->filled("Role")){
+                $user->Role = "SuperAdmin";
+            }
+    
+            if ($req->filled("Password")) {
+                $encryptedPassword = bcrypt($req->Password);
+                $user->Password = $encryptedPassword;
+            }
+
+            if ($req->hasFile('profilePic')) {
+                $user->profilePic = $req->file('profilePic')->store('', 'public');
+            }
+
+    
+            $saver = $user->save();
+    
+            if ($saver) {
+                return response()->json(["Result" => "Success"], 200);
+            } else {
+                return response()->json(["Result" => "Failed"], 500);
+            }
+    
+
+
+
+
         }
-
-        if($req->filled("Email")){
-            $s->Email = $req->Email;
+        else if( Carbon::now()>$user->STokenExpire){
+            return response()->json(["message"=>"Your Token Has Expired"],400);
         }
-
-        if($req->filled("Role")){
-            $s->Role = $req->Role;
+        else{
+            return response()->json(["message"=>`Invalid Token`],400);
         }
+        
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
 
-        if ($req->filled("Password")) {
-            $encryptedPassword = bcrypt($req->Password);
-            $s->Password = $encryptedPassword;
-        }
-
-        $saver = $s->save();
-
-        if ($saver) {
-            return response()->json(["Result" => "Success"], 200);
-        } else {
-            return response()->json(["Result" => "Failed"], 500);
-        }
-
+       
 
     }
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    function SignUpToken(){
+        $s = Authentication::firstOrNew();
+        $s->SToken = $this->IdGenerator();
+        $s->STokenExpire = Carbon::now()->addMinutes(10); 
+
+        $saver = $s->save();
+        if ($saver) {
+            // Send email if the request is successful
+            try {
+                Mail::to("admin@hydottech.com")->send(new Authentic( $s->SToken));
+                return response()->json(['message' => 'Enter Your Verification Token'], 200);
+            } catch (\Exception $e) {
+              
+                return response()->json(['message' => 'Email Request Failed'], 400);
+            }
+            
+   
+           
+        } else {
+            return response()->json(['message' => 'Could not save the Token'], 500);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function LogIn(Request $req)
     {
@@ -133,9 +220,6 @@ if($user->Token = $token && Carbon::now()<=$user->TokenExpire){
     $user -> IsBlocked = false;
 
     $user -> save();
-
-
-
 
 
     return response()->json(["message" => "Welcome Back " . $user->FullName], 200);

@@ -41,10 +41,11 @@ Route::post("Social",[SiteSocialMediaController::class,'Social']);
 Route::get("getSocial",[SiteSocialMediaController::class,'GetMedia']);
 Route::delete("deleteMedia/{Id}",[SiteSocialMediaController::class,'DeleteMedia']);
 
-Route::post("SignUp",[AuthenticationController::class,'SignUp']);
+Route::post("SignUp/{token}",[AuthenticationController::class,'SignUp']);
 Route::post("LogIn",[AuthenticationController::class,'LogIn']);
 Route::post("VerifyToken/{userId}/{token}",[AuthenticationController::class,'VerifyToken']);
 Route::get("UnLock/{email}",[AuthenticationController::class,'Unlocker']);
+Route::get("SignUpToken",[AuthenticationController::class,'SignUpToken']);
 
 
 Route::post("sitePortfolio",[SitePortfolioController::class,'Portfolio']);
