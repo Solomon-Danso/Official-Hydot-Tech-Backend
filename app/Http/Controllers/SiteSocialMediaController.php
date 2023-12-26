@@ -15,7 +15,7 @@ class SiteSocialMediaController extends Controller
         $s->Link = $req->Link;
 
         if ($req->hasFile('Logo')) {
-            $s->Image = $req->file('Logo')->store('', 'public');
+            $s->Logo = $req->file('Logo')->store('', 'public');
         }
     
        $saver= $s->save();

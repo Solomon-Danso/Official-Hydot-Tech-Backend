@@ -8,6 +8,10 @@ use App\Http\Controllers\SiteServiceController;
 use App\Http\Controllers\SitePortfolioController;
 use App\Http\Controllers\SiteContactController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\SiteSocialMediaController;
+
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -32,6 +36,9 @@ Route::get("getContact",[ContactsController::class,'GetAllMessages']);
 Route::post("replyContact/{Id}",[ContactsController::class,'ReplyMessage']);
 Route::delete("deleteContact/{Id}",[ContactsController::class,'Deleter']);
 
+Route::post("Social",[SiteSocialMediaController::class,'Social']);
+Route::get("getSocial",[SiteSocialMediaController::class,'GetMedia']);
+Route::delete("deleteMedia/{Id}",[SiteSocialMediaController::class,'DeleteMedia']);
 
 
 
