@@ -213,7 +213,7 @@ if($user==null){
     return response()->json(["message"=>"User does not exist"],400);
 }
 
-if($user->Token = $token && Carbon::now()<=$user->TokenExpire){
+if($user->Token === $token && Carbon::now()<=$user->TokenExpire){
     $user->Token = null;
     $user->TokenExpire = null;
     $user->LoginAttempt = 0;
@@ -223,12 +223,13 @@ if($user->Token = $token && Carbon::now()<=$user->TokenExpire){
 
     $c = [
         "FullName" => $user->FullName,
-        "profilePic" => $user->profilePic,
         "UserId" => $user->UserId,
+        "profilePic" => $user->profilePic
     ];
 
     return response()->json(["message" => $c], 200);
 }
+
 else if( Carbon::now()>$user->TokenExpire){
     return response()->json(["message"=>"Your Token Has Expired"],400);
 }
