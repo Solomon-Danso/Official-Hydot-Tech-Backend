@@ -84,6 +84,25 @@ class PSourceController extends Controller
         return PSource::where("Section", $Section)->get();
     }
 
+    function GetSourceName()
+    {
+        $sources = PSource::all();
+        $sectionArray = $sources->pluck('Section')->toArray();
+    
+        return $sectionArray;
+    }
+
+    function GetSourceAmnt()
+    {
+        $sources = PSource::all();
+        $sectionArray = $sources->pluck('Amount')->toArray();
+    
+        return $sectionArray;
+    }
+    
+
+   
+
     function DeleteSource($Id){
         $s = PSource::where("id",$Id);
         if($s==null){

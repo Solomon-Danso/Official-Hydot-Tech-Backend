@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PSaving;
+use App\Models\PConfig;
 use Carbon\Carbon;
 
-class PSavingController extends Controller
+class PConfigController extends Controller
 {
-    function CreateSaving(Request $req){
-        $s = new PSaving();
+    function CreateConfig(Request $req){
+        $s = new PConfig();
 
         if($req->filled("Section")){
             $s->Section = $req->Section;
         }
 
-        if($req->filled("Saving")){
-            $s->Saving = $req->Saving;
+        if($req->filled("Config")){
+            $s->Config = $req->Config;
         }
 
-        if($req->filled("Amount")){
-            $s->Amount = $req->Amount;
+        if($req->filled("Percentage")){
+            $s->Percentage = $req->Percentage;
         }
 
         if($req->filled("TheDate")){
@@ -29,18 +29,18 @@ class PSavingController extends Controller
         $s->Status = "Ongoing";
 
         
-        $c = PSaving::where('Section', $req->Section)->first();
+        $c = PConfig::where('Section', $req->Section)->first();
         if($c){
             if($req->filled("Section")){
                 $c->Section = $req->Section;
             }
     
-            if($req->filled("Saving")){
-                $c->Saving = $req->Saving;
+            if($req->filled("Config")){
+                $c->Config = $req->Config;
             }
     
-            if($req->filled("Amount")){
-                $c->Amount = $req->Amount;
+            if($req->filled("Percentage")){
+                $c->Percentage = $req->Percentage;
             }
     
             if($req->filled("TheDate")){
@@ -74,23 +74,23 @@ class PSavingController extends Controller
 
     }
 
-    function UpdateSaving(Request $req, $Id){
-        $s = PSaving::where("id",$Id)->first();
+    function UpdateConfig(Request $req, $Id){
+        $s = PConfig::where("id",$Id)->first();
 
         if($s==null){
-            return response()->json(["message"=>"Saving Not Found"],400);
+            return response()->json(["message"=>"Config Not Found"],400);
         }
 
         if($req->filled("Section")){
             $s->Section = $req->Section;
         } 
 
-        if($req->filled("Saving")){
-            $s->Saving = $req->Saving;
+        if($req->filled("Config")){
+            $s->Config = $req->Config;
         }
 
-        if($req->filled("Amount")){
-            $s->Amount = $req->Amount;
+        if($req->filled("Percentage")){
+            $s->Percentage = $req->Percentage;
         }
 
         if($req->filled("StartDate")){
@@ -113,13 +113,13 @@ class PSavingController extends Controller
 
     }
 
-    function GetSaving($Section){
+    function GetConfig($Section){
 
-        return PSaving::where("Section", $Section)->get();
+        return PConfig::where("Section", $Section)->get();
     }
 
-    function GetSavingD() {
-        $grouped = PSaving::all();
+    function GetConfigD() {
+        $grouped = PConfig::all();
             return $grouped;
                         
             }
@@ -127,10 +127,10 @@ class PSavingController extends Controller
     
     
 
-    function DeleteSaving($Id){
-        $s = PSaving::where("id",$Id);
+    function DeleteConfig($Id){
+        $s = PConfig::where("id",$Id);
         if($s==null){
-            return response()->json(["message"=>"Saving Not Found"],400);
+            return response()->json(["message"=>"Config Not Found"],400);
         }
 
         $saver = $s->delete();

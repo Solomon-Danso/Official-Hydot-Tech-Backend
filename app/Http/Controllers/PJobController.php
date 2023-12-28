@@ -79,6 +79,28 @@ class PJobController extends Controller
 
     }
 
+
+
+    function GetJobName()
+    {
+        $topFiveTargets = PJob::orderBy('Amount', 'desc')->limit(5)->get();
+        $targetNames = $topFiveTargets->pluck('Section')->toArray();
+    
+        return $targetNames;
+    }
+    
+    function GetJobAmnt()
+    {
+        $topFiveTargets = PJob::orderBy('Amount', 'desc')->limit(5)->get();
+        $targetNames = $topFiveTargets->pluck('Amount')->toArray();
+    
+        return $targetNames;
+    }
+
+
+
+
+
     function GetJob($Section){
 
         return PJob::where("Section", $Section)->get();

@@ -79,6 +79,28 @@ class PAssetController extends Controller
 
     }
 
+
+
+    function GetAssetName()
+{
+    $topFiveTargets = PAsset::orderBy('Amount', 'desc')->limit(5)->get();
+    $targetNames = $topFiveTargets->pluck('Section')->toArray();
+
+    return $targetNames;
+}
+
+function GetAssetAmnt()
+{
+    $topFiveTargets = PAsset::orderBy('Amount', 'desc')->limit(5)->get();
+    $targetNames = $topFiveTargets->pluck('Amount')->toArray();
+
+    return $targetNames;
+}
+
+
+
+
+
     function GetAsset($Section){
 
         return PAsset::where("Section", $Section)->get();

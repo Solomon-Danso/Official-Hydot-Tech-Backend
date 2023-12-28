@@ -84,6 +84,31 @@ class PDebtController extends Controller
         return PDebt::where("Section", $Section)->get();
     }
 
+
+
+    function GetDebtName()
+    {
+        $topFiveTargets = PDebt::orderBy('Amount', 'desc')->limit(5)->get();
+        $targetNames = $topFiveTargets->pluck('Section')->toArray();
+    
+        return $targetNames;
+    }
+    
+    function GetDebtAmnt()
+    {
+        $topFiveTargets = PDebt::orderBy('Amount', 'desc')->limit(5)->get();
+        $targetNames = $topFiveTargets->pluck('Amount')->toArray();
+    
+        return $targetNames;
+    }
+    
+
+
+
+
+
+
+
     function DeleteDebt($Id){
         $s = PDebt::where("id",$Id);
         if($s==null){

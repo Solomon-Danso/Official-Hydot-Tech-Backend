@@ -83,9 +83,26 @@ class PStrategyController extends Controller
             return response()->json(["message"=>"An error has occured"],400);
         }
 
-
-
     }
+
+
+    function GetStrategyName()
+    {
+        $topFiveTargets =  PStrategy::orderBy('Amount', 'desc')->limit(5)->get();
+        $targetNames = $topFiveTargets->pluck('Section')->toArray();
+    
+        return $targetNames;
+    }
+    
+    function GetStrategyAmnt()
+    {
+        $topFiveTargets =  PStrategy::orderBy('Amount', 'desc')->limit(5)->get();
+        $targetNames = $topFiveTargets->pluck('Amount')->toArray();
+    
+        return $targetNames;
+    }
+
+
 
     function GetStrategy($Section){
 

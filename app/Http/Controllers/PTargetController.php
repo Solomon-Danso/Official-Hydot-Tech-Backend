@@ -100,4 +100,20 @@ class PTargetController extends Controller
 
     }
 
+    function GetTargetName()
+    {
+        $sources = PTarget::all();
+        $sectionArray = $sources->pluck('Section')->toArray();
+    
+        return $sectionArray;
+    }
+
+    function GetTargetAmnt()
+    {
+        $sources = PTarget::all();
+        $sectionArray = $sources->pluck('Amount')->toArray();
+    
+        return $sectionArray;
+    }
+
 }

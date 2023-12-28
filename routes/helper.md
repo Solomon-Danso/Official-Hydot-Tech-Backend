@@ -1,4 +1,4 @@
-Route::post("CreateSaving",[PSavingController::class,'CreateSaving']);
-Route::post("UpdateSaving/{Id}",[PSavingController::class,'UpdateSaving']);
-Route::get("GetSaving/{Section}",[PSavingController::class,'GetSaving']);
-Route::delete("DeleteSaving/{Id}",[PSavingController::class,'DeleteSaving']);
+Route::post("CreateConfig",[PConfigController::class,'CreateConfig']);
+Route::post("UpdateConfig/{Id}",[PConfigController::class,'UpdateConfig']);
+Route::get("GetConfig/{Section}",[PConfigController::class,'GetConfig']);
+Route::delete("DeleteConfig/{Id}",[PConfigController::class,'DeleteConfig']);

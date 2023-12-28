@@ -84,6 +84,26 @@ class PRecieveController extends Controller
         return PRecieve::where("Section", $Section)->get();
     }
 
+
+    function GetRecieveName()
+    {
+        $sources = PRecieve::all();
+        $sectionArray = $sources->pluck('Section')->toArray();
+    
+        return $sectionArray;
+    }
+
+    function GetRecieveAmnt()
+    {
+        $sources = PRecieve::all();
+        $sectionArray = $sources->pluck('Amount')->toArray();
+    
+        return $sectionArray;
+    }
+
+
+
+
     function DeleteRecieve($Id){
         $s = PRecieve::where("id",$Id);
         if($s==null){
