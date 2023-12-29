@@ -19,7 +19,7 @@ use App\Http\Controllers\PDebtController;
 use App\Http\Controllers\PJobController;
 use App\Http\Controllers\PSavingController;
 use App\Http\Controllers\PConfigController;
-
+use App\Http\Controllers\ClientController;
 
 
 
@@ -154,6 +154,11 @@ Route::get("GetConfig/{Section}",[PConfigController::class,'GetConfig']);
 Route::delete("DeleteConfig/{Id}",[PConfigController::class,'DeleteConfig']);
 Route::get("GetConfigD",[PConfigController::class,'GetConfigD']);
 
+
+Route::post("RegisterCompany",[ClientController::class,'RegisterCompany']);
+Route::post("UpdateCompany/{CompanyId}",[ClientController::class,'UpdateCompany']);
+Route::get("GetCompany",[ClientController::class,'GetCompany']);
+Route::delete("DeleteCompany/{CompanyId}",[ClientController::class,'DeleteCompany']);
 
 
 
