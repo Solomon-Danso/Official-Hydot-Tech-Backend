@@ -8,6 +8,9 @@ use App\Models\RegisterCompany;
 use App\Mail\Clients;
 use App\Mail\UpdateClients;
 use App\Mail\DeleteClients;
+use App\Jobs\BulkUploadCompanies;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class ClientController extends Controller
 {
@@ -175,7 +178,20 @@ class ClientController extends Controller
 
     }
 
-
+    public function bulkUpload(Request $request)
+    {
+        if ($request->hasFile('excel_file')) {
+            $file = $request->file('excel_file');
+    
+            // Pass the file path to the job
+            $filePath = $file->getPathname();
+            BulkUploadCompanies::dispatch($filePath);
+    
+            return response()->json(["message" => "Bulk Upload Successful"], 200);
+        }
+    
+        return response()->json(["message" => "No file uploaded or error occurred"], 400);
+    }
 
 
 

@@ -160,7 +160,7 @@ Route::post("UpdateCompany/{CompanyId}",[ClientController::class,'UpdateCompany'
 Route::get("GetCompany",[ClientController::class,'GetCompany']);
 Route::delete("DeleteCompany/{CompanyId}",[ClientController::class,'DeleteCompany']);
 
-
+Route::post("bulkUpload",[ClientController::class,'bulkUpload']);
 
 
 
