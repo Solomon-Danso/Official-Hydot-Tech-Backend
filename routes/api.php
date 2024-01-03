@@ -20,7 +20,7 @@ use App\Http\Controllers\PJobController;
 use App\Http\Controllers\PSavingController;
 use App\Http\Controllers\PConfigController;
 use App\Http\Controllers\ClientController;
-
+use App\Http\Controllers\ProjectCodeController;
 
 
 
@@ -135,6 +135,27 @@ Route::delete("DeleteJob/{Id}",[PJobController::class,'DeleteJob']);
 Route::get("GetJobName",[PJobController::class,'GetJobName']);
 Route::get("GetJobAmnt",[PJobController::class,'GetJobAmnt']);
 
+Route::get("CountAllProject",[ProjectCodeController::class,'CountAllProject']);
+Route::get("SumAllClients",[ProjectCodeController::class,'SumAllClients']);
+Route::get("SumAllPayment",[ProjectCodeController::class,'SumAllPayment']);
+Route::get("TopFiveMostViewedName",[ProjectCodeController::class,'TopFiveMostViewedName']);
+Route::get("TopFiveMostViewedValue",[ProjectCodeController::class,'TopFiveMostViewedValue']);
+Route::get("TopFiveMostPayedName",[ProjectCodeController::class,'TopFiveMostPayedName']);
+Route::get("TopFiveMostPayedValue",[ProjectCodeController::class,'TopFiveMostPayedValue']);
+Route::get("GetAuditTrial",[ClientController::class,'GetAuditTrial']);
+Route::get("GetTodayAuditTrial",[ClientController::class,'GetTodayAuditTrial']);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -158,14 +179,29 @@ Route::get("GetConfigD",[PConfigController::class,'GetConfigD']);
 Route::post("RegisterCompany",[ClientController::class,'RegisterCompany']);
 Route::post("UpdateCompany/{CompanyId}",[ClientController::class,'UpdateCompany']);
 Route::get("GetCompany",[ClientController::class,'GetCompany']);
+Route::post("SearchCompany",[ClientController::class,'SearchCompany']);
+Route::get("GetOneCompany/{CompanyId}",[ClientController::class,'GetOneCompany']);
 Route::delete("DeleteCompany/{CompanyId}",[ClientController::class,'DeleteCompany']);
 
+
+
 Route::post("bulkUpload",[ClientController::class,'bulkUpload']);
-Route::post("CreateCompanyToken/{CompanyId}",[ClientController::class,'CreateCompanyToken']);
-Route::get("GetToken/{token}",[ClientController::class,'GetToken']);
+Route::post("CompanyToken",[ClientController::class,'CompanyToken']);
+Route::post("PricesConfiguration",[ClientController::class,'PricesConfiguration']);
+Route::post("UpdatePricesConfiguration/{ProductId}",[ClientController::class,'UpdatePricesConfiguration']);
+Route::delete("DeletePricesConfiguration/{ProductId}",[ClientController::class,'DeletePricesConfiguration']);
+Route::get("GetPricesConfiguration",[ClientController::class,'GetPricesConfiguration']);
 
 
+Route::post("CreatePaymentHub/{CompanyId}",[ClientController::class,'CreatePaymentHub']);
+Route::get("GetPayment",[ClientController::class,'GetPayment']);
+Route::get("GetOnePayment/{CompanyId}",[ClientController::class,'GetOnePayment']);
 
+
+Route::post("CreateProject",[ProjectCodeController::class,'CreateProject']);
+Route::post("UpdateProject/{id}",[ProjectCodeController::class,'UpdateProject']);
+Route::delete("DeleteProject/{id}",[ProjectCodeController::class,'DeleteProject']);
+Route::get("AllProject",[ProjectCodeController::class,'AllProject']);
 
 
 
