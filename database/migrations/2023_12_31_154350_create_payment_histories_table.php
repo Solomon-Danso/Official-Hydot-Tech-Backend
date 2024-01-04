@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('payment_histories', function (Blueprint $table) {
             $table->id();
-            $table->string("CompanyId")->nullable();
-            $table->string("CompanyName")->nullable();
-            $table->string("CompanyEmail")->nullable();
-            $table->string("CompanyPhone")->nullable();
-            $table->string("PaymentId")->nullable();
-            $table->string("PaymentMethod")->nullable();
+            $table->longText("CompanyId")->nullable();
+            $table->longText("CompanyName")->nullable();
+            $table->longText("CompanyEmail")->nullable();
+            $table->longText("CompanyPhone")->nullable();
+            $table->longText("PaymentId")->nullable();
+            $table->longText("PaymentMethod")->nullable();
             $table->float("Amount")->nullable();
             $table->integer("SubscriptionPeriodInDays")->nullable();
-            $table -> string("ProductId")->nullable();
-            $table -> string("ProductName")->nullable();
+            $table -> longText("ProductId")->nullable();
+            $table -> longText("ProductName")->nullable();
 
             $table->timestamps();
         });

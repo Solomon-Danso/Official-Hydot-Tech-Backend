@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('site_social_media', function (Blueprint $table) {
             $table->id();
-            $table->string("Logo")->nullable();
-            $table->string("Link")->nullable();
+            $table->longText("Logo")->nullable();
+            $table->longText("Link")->nullable();
             $table->timestamps();
         });
     }

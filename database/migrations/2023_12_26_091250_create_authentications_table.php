@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('authentications', function (Blueprint $table) {
             $table->id();
-            $table->string("FullName")->nullable();
-            $table->string("Contact")->nullable();
-            $table->string("Email")->nullable();
-            $table->string("Role")->nullable();
-            $table->string("Password")->nullable();
-            $table->string("Token")->nullable();
-            $table->string("UserId")->nullable();
-            $table->string("SToken")->nullable();
+            $table->longText("FullName")->nullable();
+            $table->longText("Contact")->nullable();
+            $table->longText("Email")->nullable();
+            $table->longText("Role")->nullable();
+            $table->longText("Password")->nullable();
+            $table->longText("Token")->nullable();
+            $table->longText("UserId")->nullable();
+            $table->longText("SToken")->nullable();
             $table->dateTime("TokenExpire")->nullable();
             $table->dateTime("STokenExpire")->nullable();
             $table->integer("LoginAttempt")->nullable();

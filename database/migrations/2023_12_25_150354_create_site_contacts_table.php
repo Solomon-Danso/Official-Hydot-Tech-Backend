@@ -16,8 +16,8 @@ return new class extends Migration
             $table -> integer("Clients");
             $table -> integer("Staffs");
             $table -> integer("Projects");
-            $table -> string("Phone");
-            $table -> string("Email");
+            $table -> longText("Phone");
+            $table -> longText("Email");
             $table->timestamps();
         });
     }

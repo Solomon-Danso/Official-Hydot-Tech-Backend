@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('site_services', function (Blueprint $table) {
             $table->id();
-            $table->string("Web")->nullable();
-            $table->string("Soft")->nullable();
-            $table->string("ERP")->nullable();
+            $table->longText("Web")->nullable();
+            $table->longText("Soft")->nullable();
+            $table->longText("ERP")->nullable();
             $table->timestamps();
         });
     }

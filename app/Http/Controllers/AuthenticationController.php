@@ -92,10 +92,7 @@ class AuthenticationController extends Controller
  
  
  
- 
- 
- 
- 
+
  
  
     function SignUpToken(){

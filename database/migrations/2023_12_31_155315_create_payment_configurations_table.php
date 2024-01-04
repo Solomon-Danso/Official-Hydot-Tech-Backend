@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('payment_configurations', function (Blueprint $table) {
             $table->id();
-            $table -> string("ProductId")->nullable();
-            $table -> string("ProductName")->nullable();
+            $table -> longText("ProductId")->nullable();
+            $table -> longText("ProductName")->nullable();
             $table-> float("MarginalPrice")->nullable();
             $table -> integer("ActiveUsers")->nullable();
             $table -> integer("InActiveUsers")->nullable();

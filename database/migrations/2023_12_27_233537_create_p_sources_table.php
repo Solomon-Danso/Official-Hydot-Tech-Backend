@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('p_sources', function (Blueprint $table) {
             $table->id();
-            $table->string("Section")->nullable();
-            $table->string("Source")->nullable();
+            $table->longText("Section")->nullable();
+            $table->longText("Source")->nullable();
             $table->float("Amount")->nullable();
             $table->dateTime("StartDate")->nullable();
-            $table->string("Status")->nullable();
+            $table->longText("Status")->nullable();
             $table->timestamps();
         });
     }

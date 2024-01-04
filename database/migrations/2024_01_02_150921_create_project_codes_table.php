@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('project_codes', function (Blueprint $table) {
             $table->id();
-            $table->string("Name");
-            $table->string("Description");
-            $table -> string("Industry");
-            $table  -> string("SourceCode");
-            $table -> string("Status");
-            $table ->string("Section");
+            $table->longText("Name");
+            $table->longText("Description");
+            $table -> longText("Industry");
+            $table  -> longText("SourceCode");
+            $table -> longText("Status");
+            $table ->longText("Section");
             $table->timestamps();
         });
     }

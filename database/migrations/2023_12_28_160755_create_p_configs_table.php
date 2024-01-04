@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('p_configs', function (Blueprint $table) {
             $table->id();
-            $table->string("Section")->nullable();
-            $table->string("Config")->nullable();
+            $table->longText("Section")->nullable();
+            $table->longText("Config")->nullable();
             $table->float("Percentage")->nullable();
             $table->dateTime("TheDate")->nullable();
-            $table->string("Status")->nullable();
+            $table->longText("Status")->nullable();
             $table->timestamps();
         });
     }

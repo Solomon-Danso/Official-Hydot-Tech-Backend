@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('site_homes', function (Blueprint $table) {
             $table->id();
-            $table->string("companyLogo")->nullable();
-            $table->string("backgroundImage")->nullable();
-            $table->string("welcomeMessage")->nullable();
-            $table->string("slogan")->nullable();
+            $table->longText("companyLogo")->nullable();
+            $table->longText("backgroundImage")->nullable();
+            $table->longText("welcomeMessage")->nullable();
+            $table->longText("slogan")->nullable();
             $table->timestamps();
         });
     }

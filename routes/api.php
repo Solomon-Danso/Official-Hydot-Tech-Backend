@@ -146,6 +146,7 @@ Route::get("GetAuditTrial",[ClientController::class,'GetAuditTrial']);
 Route::get("GetTodayAuditTrial",[ClientController::class,'GetTodayAuditTrial']);
 
 
+Route::get("Test",[ProjectCodeController::class,'Test']);
 
 
 

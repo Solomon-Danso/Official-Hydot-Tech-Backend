@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('audit_trails', function (Blueprint $table) {
             $table->id();
-            $table->string("ipAddress");
-            $table->string("country");
-            $table->string("city");
-            $table->string("device");
-            $table->string("os");
-            $table->string("urlPath");
+            $table->longText("ipAddress");
+            $table->longText("country");
+            $table->longText("city");
+            $table->longText("device");
+            $table->longText("os");
+            $table->longText("urlPath");
     
-            $table->string("action");
-            $table->string("googlemap");
+            $table->longText("action");
+            $table->longText("googlemap");
           
 
             $table->timestamps();

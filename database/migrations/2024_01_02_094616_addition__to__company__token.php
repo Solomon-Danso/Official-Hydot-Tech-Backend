@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('company_tokens', function (Blueprint $table) {
-            $table -> string("ProductId")->nullable();
-            $table -> string("ProductName")->nullable();
+            $table -> longText("ProductId")->nullable();
+            $table -> longText("ProductName")->nullable();
 
         });
     }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('p_targets', function (Blueprint $table) {
             $table->id();
-            $table->string("Section")->nullable();
-            $table->string("Target")->nullable();
+            $table->longText("Section")->nullable();
+            $table->longText("Target")->nullable();
             $table->float("Amount")->nullable();
             $table->dateTime("Deadline")->nullable();
             $table->timestamps();

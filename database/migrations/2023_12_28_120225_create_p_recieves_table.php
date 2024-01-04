@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('p_recieves', function (Blueprint $table) {
             $table->id();
-            $table->string("Section")->nullable();
-            $table->string("Recieve")->nullable();
+            $table->longText("Section")->nullable();
+            $table->longText("Recieve")->nullable();
             $table->float("Amount")->nullable();
             $table->dateTime("TheDate")->nullable();
-            $table->string("Status")->nullable();
+            $table->longText("Status")->nullable();
             $table->timestamps();
         });
     }

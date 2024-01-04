@@ -107,6 +107,10 @@ class ProjectCodeController extends Controller
 
 }
 
+function Test(){
+    return response()->json(["message"=>"Server Is On"],200);
+}
+
     function AllProject(){
        return ProjectCode::all(); 
     }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('p_targets', function (Blueprint $table) {
-            $table->string('Status')->nullable()->after('Deadline');
+            $table->longText('Status')->nullable()->after('Deadline');
         });
     }
 

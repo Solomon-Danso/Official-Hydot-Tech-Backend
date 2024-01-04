@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('p_strategies', function (Blueprint $table) {
             $table->id();
-            $table->string("Section")->nullable();
-            $table->string("Target")->nullable();
+            $table->longText("Section")->nullable();
+            $table->longText("Target")->nullable();
             $table->float("Amount")->nullable();
             $table->dateTime("Deadline")->nullable();
-            $table->string("Statuz")->nullable();
-            $table->string("Description")->nullable();
+            $table->longText("Statuz")->nullable();
+            $table->longText("Description")->nullable();
             $table->timestamps();
         });
     }

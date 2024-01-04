@@ -12,7 +12,7 @@ class AddProfilePicToAuthenticationsTable extends Migration
     public function up()
     {
         Schema::table('authentications', function (Blueprint $table) {
-            $table->string('profilePic')->nullable()->after('IsBlocked');
+            $table->longText('profilePic')->nullable()->after('IsBlocked');
             // 'profilePic' column will be added after 'IsBlocked' column
         });
     }

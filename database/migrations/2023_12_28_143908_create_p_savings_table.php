@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('p_savings', function (Blueprint $table) {
             $table->id();
-            $table->string("Section")->nullable();
-            $table->string("Saving")->nullable();
+            $table->longText("Section")->nullable();
+            $table->longText("Saving")->nullable();
             $table->float("Amount")->nullable();
             $table->dateTime("TheDate")->nullable();
-            $table->string("Status")->nullable();
+            $table->longText("Status")->nullable();
             $table->timestamps();
         });
     }

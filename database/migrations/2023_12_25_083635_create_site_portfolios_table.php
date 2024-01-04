@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('site_portfolios', function (Blueprint $table) {
             $table->id();
-            $table->string("Section")->nullable();
-            $table->string("Background")->nullable();
-            $table->string("Document")->nullable();
-            $table->string("Title")->nullable();
-            $table->string("Link")->nullable();
+            $table->longText("Section")->nullable();
+            $table->longText("Background")->nullable();
+            $table->longText("Document")->nullable();
+            $table->longText("Title")->nullable();
+            $table->longText("Link")->nullable();
 
             $table->integer("Views")->nullable();
-            $table->string("ProductId")->nullable();
+            $table->longText("ProductId")->nullable();
             $table->integer("Subscribers")->nullable();
             $table->float("Revenue")->nullable();
             $table->integer("PastUsers")->nullable();

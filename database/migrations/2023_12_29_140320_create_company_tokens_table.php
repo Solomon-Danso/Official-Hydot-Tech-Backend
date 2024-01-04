@@ -13,23 +13,23 @@ return new class extends Migration
     {
         Schema::create('company_tokens', function (Blueprint $table) {
             $table->id();
-            $table->string("CompanyId")->nullable();
-            $table->string("CompanyLogo")->nullable();
-            $table->string("CompanyName")->nullable();
-            $table->string("Location")->nullable();
-            $table->string("ContactPerson")->nullable();
-            $table->string("CompanyPhone")->nullable();
-            $table->string("CompanyEmail")->nullable();
-            $table->string("ContactPersonPhone")->nullable();
-            $table->string("ContactPersonEmail")->nullable();
-            $table->string("CompanyStatus")->nullable();
-            $table->string("Token")->nullable();
+            $table->longText("CompanyId")->nullable();
+            $table->longText("CompanyLogo")->nullable();
+            $table->longText("CompanyName")->nullable();
+            $table->longText("Location")->nullable();
+            $table->longText("ContactPerson")->nullable();
+            $table->longText("CompanyPhone")->nullable();
+            $table->longText("CompanyEmail")->nullable();
+            $table->longText("ContactPersonPhone")->nullable();
+            $table->longText("ContactPersonEmail")->nullable();
+            $table->longText("CompanyStatus")->nullable();
+            $table->longText("Token")->nullable();
             $table->integer("Subcriptions")->nullable();
             $table->dateTime("StartDate")->nullable();
             $table->dateTime("SystemDate")->nullable();
             $table->dateTime("CurrentDate")->nullable();
             $table->dateTime("ExpireDate")->nullable();
-            $table->string("TokenStatus")->nullable();
+            $table->longText("TokenStatus")->nullable();
             $table->timestamps();
         });
     }

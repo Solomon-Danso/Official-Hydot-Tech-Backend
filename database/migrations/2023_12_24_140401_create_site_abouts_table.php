@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('site_abouts', function (Blueprint $table) {
             $table->id();
-            $table->string("HydotTech")->nullable();
-            $table->string("Vision")->nullable();
-            $table->string("Mission")->nullable();
-            $table->string("Image")->nullable();
+            $table->longText("HydotTech")->nullable();
+            $table->longText("Vision")->nullable();
+            $table->longText("Mission")->nullable();
+            $table->longText("Image")->nullable();
             $table->timestamps();
         });
     }
