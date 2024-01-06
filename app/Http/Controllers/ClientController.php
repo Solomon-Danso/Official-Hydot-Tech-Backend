@@ -9,6 +9,7 @@ use App\Mail\Clients;
 use App\Mail\UpdateClients;
 use App\Mail\DeleteClients;
 use App\Mail\Subscription;
+use App\Mail\Setup;
 use App\Jobs\BulkUploadCompanies;
 use App\Jobs\BulkUpdateCompanies;
 use Maatwebsite\Excel\Facades\Excel;
@@ -58,10 +59,10 @@ class ClientController extends Controller
     $s->ContactPersonEmail = $comp->ContactPersonEmail;
     $s->CompanyStatus = $comp->CompanyStatus;
     $s->ProductId = $product->ProductId;
-    $s->ProductName = $product->ProductName;
-    $s->ProductSection = $product->ProductSection;
+    $s->ProductName = $product->Title;
+    $s->ProductSection = $product->Section;
     $s->Token = $this->TokenGenerator();
-    $expireDate = $currentDate->copy()->addDays(1);
+   
     $s->ExpireDate = Carbon::now()->addMinutes(15);
 
     $checker = CompanySetUp::where("ProductId",  $s->ProductId)->where("CompanyId", $s->CompanyId)->first();
@@ -73,7 +74,7 @@ class ClientController extends Controller
         if ($saver) {
             $this->Auditor("SetUp A Company");
             try {
-                Mail::to($r->CompanyEmail)->send(new Subscription($s));
+                Mail::to($s->CompanyEmail)->send(new Setup($s));
                 return response()->json(["message" => "Success"], 200);
             } catch (\Exception $e) {
               

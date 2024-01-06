@@ -43,11 +43,11 @@
     <div class="container">
         <h1>Welcome!</h1>
         <p>Congratulations on signing up with us. We are excited to have you on board.</p>
-        <p>Here is your subscription token:</p>
+        <p>Here is your sign up token:</p>
         <div class="token">
-            <strong>{{ $company->Token }}</strong>
+            <strong>{{ $setUp->Token }}</strong>
         </div>
-        <p>This token will expire in 10 minutes</p>
+        <p>This token will expire in 15 minutes</p>
         <p>Use this token to access our platform and enjoy our services.</p>
 
         <p class="signature">Best regards,<br>{{ config('app.name') }}</p>
