@@ -50,7 +50,7 @@ Route::post("siteContact",[SiteContactController::class,'Contact']);
 Route::get("getContact",[SiteContactController::class,'GetContact']);
 
 Route::post("Contact",[ContactsController::class,'SendMessage']);
-Route::get("getContact",[ContactsController::class,'GetAllMessages']);
+Route::get("getMessages",[ContactsController::class,'GetAllMessages']);
 Route::post("replyContact/{Id}",[ContactsController::class,'ReplyMessage']);
 Route::delete("deleteContact/{Id}",[ContactsController::class,'Deleter']);
 
@@ -144,7 +144,9 @@ Route::get("TopFiveMostPayedName",[ProjectCodeController::class,'TopFiveMostPaye
 Route::get("TopFiveMostPayedValue",[ProjectCodeController::class,'TopFiveMostPayedValue']);
 Route::get("GetAuditTrial",[ClientController::class,'GetAuditTrial']);
 Route::get("GetTodayAuditTrial",[ClientController::class,'GetTodayAuditTrial']);
-
+Route::post("CompanySetUp",[ClientController::class,'CompanySetUp']);
+Route::post("CompanyTokenSetUp",[ClientController::class,'CompanyTokenSetUp']);
+Route::get("GetCompaniesSetup",[ClientController::class,'GetCompaniesSetup']);
 
 Route::get("Test",[ProjectCodeController::class,'Test']);
 

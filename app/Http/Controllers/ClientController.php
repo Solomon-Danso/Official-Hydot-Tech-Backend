@@ -17,6 +17,7 @@ use App\Models\PaymentConfiguration;
 use App\Models\PaymentHistory;
 use App\Models\SitePortfolio;
 use App\Models\AuditTrail;
+use App\Models\CompanySetUp;
 
 
 
@@ -32,7 +33,94 @@ class ClientController extends Controller
         return AuditTrail::whereDate('created_at', today())->count();
     }
     
+   function CompanySetUp(Request $req) {
 
+    $comp = RegisterCompany::where("CompanyId", $req->CompanyId)->first();
+    if(!$comp){
+        return response()->json(["message"=>"Company not found"],400);
+    }
+
+    $product = SitePortfolio::where("ProductId", $req->ProductId)->first();
+    if(!$product){
+        return response()->json(["message"=>"Product not found"],400);
+    }
+
+    $s = new CompanySetUp();
+
+    $s->CompanyId = $comp->CompanyId;
+    $s->CompanyLogo = $comp->CompanyLogo;
+    $s->CompanyName = $comp->CompanyName;
+    $s->Location = $comp->Location;
+    $s->ContactPerson = $comp->ContactPerson;
+    $s->CompanyPhone = $comp->CompanyPhone;
+    $s->CompanyEmail = $comp->CompanyEmail;
+    $s->ContactPersonPhone = $comp->ContactPersonPhone;
+    $s->ContactPersonEmail = $comp->ContactPersonEmail;
+    $s->CompanyStatus = $comp->CompanyStatus;
+    $s->ProductId = $product->ProductId;
+    $s->ProductName = $product->ProductName;
+    $s->ProductSection = $product->ProductSection;
+    $s->Token = $this->TokenGenerator();
+    $expireDate = $currentDate->copy()->addDays(1);
+    $s->ExpireDate = Carbon::now()->addMinutes(15);
+
+    $checker = CompanySetUp::where("ProductId",  $s->ProductId)->where("CompanyId", $s->CompanyId)->first();
+    if($checker){
+        return response()->json(["message"=>"Company already assigned to this product"],400);
+    }
+
+    $saver = $s->save();
+        if ($saver) {
+            $this->Auditor("SetUp A Company");
+            try {
+                Mail::to($r->CompanyEmail)->send(new Subscription($s));
+                return response()->json(["message" => "Success"], 200);
+            } catch (\Exception $e) {
+              
+                return response()->json(["message" => "Email Failed"], 400);
+            }
+
+        } else {
+            return response()->json(["Request" => "Failed"], 400);
+        }
+
+
+   
+
+
+
+
+
+   }
+
+   function CompanyTokenSetUp(Request $req){
+    $c = CompanySetUp::where("Token",$req->token)->first();
+
+    if(!$c){
+        return response()->json(["message" => "Invalid Token, Try Again"], 400);
+    }
+
+    // Get current date as Carbon instance
+    $currentDate = Carbon::now();
+
+    // Update the 'CurrentDate' field in the CompanyToken model
+
+    $this->Auditor("Get Company SetUp Token");
+
+    $c->Token = " ";
+    $c->save();
+
+    // Compare the Carbon instances directly
+    if($currentDate > $c->ExpireDate){
+        return response()->json(["message" => "Token has expired"], 400);
+    }
+    
+    return $c;
+}
+
+function GetCompaniesSetup(){
+   return CompanySetUp::all(); 
+}
 
 
 
@@ -535,8 +623,7 @@ class ClientController extends Controller
     
        
         $latitude = $ipDetails->loc ?? ''; // Latitude
-        $longitude = $ipDetails->loc ?? ''; // Longitude
-        $googleMapsLink = "https://maps.google.com/?q={$latitude},{$longitude}";
+        $googleMapsLink = "https://maps.google.com/?q={$latitude}";
     
         // Create a new AuditTrail instance and save the log to the database
         $auditTrail = new AuditTrail();
