@@ -94,6 +94,8 @@ class ClientController extends Controller
 
    }
 
+
+
    function CompanyTokenSetUp(Request $req){
     $c = CompanySetUp::where("Token",$req->token)->first();
 
@@ -388,6 +390,66 @@ function GetCompaniesSetup(){
                 return response()->json(["Request" => "Failed"], 400);
             }
         }
+    }
+
+    function RegenerateCompanySetUp(Request $req) {
+
+        $comp =  CompanySetUp::where("CompanyId", $req->CompanyId)->first();
+        if(!$comp){
+            return response()->json(["message"=>"Company not found"],400);
+        }
+    
+      
+        $comp->Token = $this->TokenGenerator();
+        $comp->ExpireDate = Carbon::now()->addMinutes(15);
+    
+    
+        $saver = $comp->save();
+            if ($saver) {
+                $this->Auditor("Regenerate A Company Token");
+                try {
+                    Mail::to($comp->CompanyEmail)->send(new Setup($comp));
+                    return response()->json(["message" => "Success"], 200);
+                } catch (\Exception $e) {
+                  
+                    return response()->json(["message" => "Email Failed"], 400);
+                }
+    
+            } else {
+                return response()->json(["Request" => "Failed"], 400);
+            }
+    
+    
+       
+    
+    
+    
+    
+    
+       }
+
+    function RegenerateCreateCompanyToken(Request $req){
+        $c = CompanyToken::where("CompanyId", $req->CompanyId)->first();
+    
+        if(!$c){
+            return response()->json(["message" => "Company Not Found"], 400);
+        }
+    
+       
+        $c->Token = $this->TokenGenerator();
+        $saver = $c->save();
+        if($saver){
+            // Send email if the request is successful
+            try {
+                Mail::to($c->CompanyEmail)->send(new Subscription($c));
+                return response()->json(["message" => "Token Sent Successfully"], 200);
+            } catch (\Exception $e) {
+                return response()->json(["message" => "Email Failed To Send"], 400);
+            }
+        } else {
+            return response()->json(["Request" => "Failed"], 400);
+        }   
+    
     }
     
 

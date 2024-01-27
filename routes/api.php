@@ -148,6 +148,13 @@ Route::post("CompanySetUp",[ClientController::class,'CompanySetUp']);
 Route::post("CompanyTokenSetUp",[ClientController::class,'CompanyTokenSetUp']);
 Route::get("GetCompaniesSetup",[ClientController::class,'GetCompaniesSetup']);
 
+Route::post("RegenerateCompanySetUp",[ClientController::class,'RegenerateCompanySetUp']);
+Route::post("RegenerateCreateCompanyToken",[ClientController::class,'RegenerateCreateCompanyToken']);
+
+
+
+
+
 Route::get("Test",[ProjectCodeController::class,'Test']);
 
 

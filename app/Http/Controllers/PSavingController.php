@@ -31,16 +31,14 @@ class PSavingController extends Controller
         
         $c = PSaving::where('Section', $req->Section)->first();
         if($c){
-            if($req->filled("Section")){
-                $c->Section = $req->Section;
-            }
+            
     
             if($req->filled("Saving")){
                 $c->Saving = $req->Saving;
             }
     
             if($req->filled("Amount")){
-                $c->Amount = $req->Amount;
+                $c->Amount = $c->Amount+$req->Amount;
             }
     
             if($req->filled("TheDate")){
