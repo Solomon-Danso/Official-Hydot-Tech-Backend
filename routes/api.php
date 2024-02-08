@@ -161,6 +161,8 @@ Route::get("GetCompany",[ClientController::class,'GetCompany']);
 Route::delete("DeleteCompany/{CompanyId}",[ClientController::class,'DeleteCompany']);
 
 Route::post("bulkUpload",[ClientController::class,'bulkUpload']);
+Route::post("CreateCompanyToken/{CompanyId}",[ClientController::class,'CreateCompanyToken']);
+Route::get("GetToken/{token}",[ClientController::class,'GetToken']);
 
 
 
