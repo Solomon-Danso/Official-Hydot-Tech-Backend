@@ -21,7 +21,7 @@ use App\Http\Controllers\PSavingController;
 use App\Http\Controllers\PConfigController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectCodeController;
-
+use App\Http\Controllers\ChampionController;
 
 
 
@@ -186,6 +186,9 @@ Route::delete("DeleteConfig/{Id}",[PConfigController::class,'DeleteConfig']);
 Route::get("GetConfigD",[PConfigController::class,'GetConfigD']);
 
 
+Route::post("LocalRegisterCompany",[ClientController::class,'LocalRegisterCompany']);
+Route::post("TestLocalRegisterCompany",[ClientController::class,'TestLocalRegisterCompany']);
+
 Route::post("RegisterCompany",[ClientController::class,'RegisterCompany']);
 Route::post("UpdateCompany/{CompanyId}",[ClientController::class,'UpdateCompany']);
 Route::get("GetCompany",[ClientController::class,'GetCompany']);
@@ -215,8 +218,10 @@ Route::get("AllProject",[ProjectCodeController::class,'AllProject']);
 
 
 
+Route::post("CreateChampion/{userId}",[ChampionController::class,'CreateChampion']);
 
-
+Route::post("GetChampion/{token}",[ChampionController::class,'GetChampion']);
+Route::post("TestChampion/{token}",[ChampionController::class,'TestChampion']);
 
 
 

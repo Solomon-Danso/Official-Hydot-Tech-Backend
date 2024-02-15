@@ -221,7 +221,8 @@ if($user->Token === $token && Carbon::now()<=$user->TokenExpire){
     $c = [
         "FullName" => $user->FullName,
         "UserId" => $user->UserId,
-        "profilePic" => $user->profilePic
+        "profilePic" => $user->profilePic,
+        
     ];
 
     return response()->json(["message" => $c], 200);
