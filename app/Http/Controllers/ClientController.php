@@ -489,6 +489,7 @@ function GetCompaniesSetup(){
         
         return $c;
     }
+    
 
 
     function PricesConfiguration(Request $req){

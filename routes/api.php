@@ -42,6 +42,9 @@ Route::post("LocalCompanySetUp",[LocalServer::class,'LocalCompanySetUp']);
 Route::post("TestLocalRegisterCompany",[LocalServer::class,'TestLocalRegisterCompany']);
 Route::get("GetPriceConfigurationForOneProduct/{ProductId}",[LocalServer::class,'GetPriceConfigurationForOneProduct']);
 
+Route::get("GetCompanyListDesc",[LocalServer::class,'GetCompanyListDesc']);
+Route::post("SetupTokenViewer",[LocalServer::class,'SetupTokenViewer']);
+Route::post("SubscribeTokenViewer",[LocalServer::class,'SubscribeTokenViewer']);
 
 
 

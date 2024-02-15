@@ -228,6 +228,34 @@ class LocalServer extends Controller
        }
     
 
+    function GetCompanyListDesc() {
+        return RegisterCompany::orderBy('created_at', 'desc')->get();
+    }
+    
+
+
+    
+    function SetupTokenViewer(Request $req){
+        $checker = CompanySetUp::where("ProductId",  $req->ProductId)->where("CompanyId", $req->CompanyId)->latest()->first();
+        if(!$checker){
+            return response()->json(["message"=>"Company Not Found"],400);
+        }
+
+        return $checker->Token;
+
+       }
+
+    
+       function SubscribeTokenViewer(Request $req){
+        $checker = CompanyToken::where("ProductId",  $req->ProductId)->where("CompanyId", $req->CompanyId)->latest()->first();
+        if(!$checker){
+            return response()->json(["message"=>"Company Not Found"],400);
+        }
+
+        return $checker->Token;
+
+       }
+
 
   
   
