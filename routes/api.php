@@ -22,7 +22,7 @@ use App\Http\Controllers\PConfigController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectCodeController;
 use App\Http\Controllers\ChampionController;
-
+use App\Http\Controllers\LocalServer;
 
 
 
@@ -34,6 +34,22 @@ use App\Http\Controllers\ChampionController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post("LocalRegisterCompany",[LocalServer::class,'LocalRegisterCompany']);
+Route::post("LocalCompanySetUp",[LocalServer::class,'LocalCompanySetUp']);
+
+Route::post("TestLocalRegisterCompany",[LocalServer::class,'TestLocalRegisterCompany']);
+Route::get("GetPriceConfigurationForOneProduct/{ProductId}",[LocalServer::class,'GetPriceConfigurationForOneProduct']);
+
+
+
+
+
+
+
+
+
 
 
 Route::post("siteHome",[SiteHomeController::class,'Home']);
@@ -184,10 +200,6 @@ Route::post("UpdateConfig/{Id}",[PConfigController::class,'UpdateConfig']);
 Route::get("GetConfig/{Section}",[PConfigController::class,'GetConfig']);
 Route::delete("DeleteConfig/{Id}",[PConfigController::class,'DeleteConfig']);
 Route::get("GetConfigD",[PConfigController::class,'GetConfigD']);
-
-
-Route::post("LocalRegisterCompany",[ClientController::class,'LocalRegisterCompany']);
-Route::post("TestLocalRegisterCompany",[ClientController::class,'TestLocalRegisterCompany']);
 
 Route::post("RegisterCompany",[ClientController::class,'RegisterCompany']);
 Route::post("UpdateCompany/{CompanyId}",[ClientController::class,'UpdateCompany']);
