@@ -76,10 +76,7 @@ class AuthenticationController extends Controller
        
        
        
-       
-       
-       
-       
+   
 
        
 
@@ -204,6 +201,8 @@ function Unlocker($email){
 }
 
 
+
+
 function VerifyToken($userId, $token){
 $user = Authentication::where('UserId', $userId)->first();
 if($user==null){
@@ -211,10 +210,18 @@ if($user==null){
 }
 
 if($user->Token === $token && Carbon::now()<=$user->TokenExpire){
+   
+   
     $user->Token = null;
     $user->TokenExpire = null;
     $user->LoginAttempt = 0;
     $user -> IsBlocked = false;
+    $user -> ServerId = $this->IdGenerator();
+   
+
+
+
+
 
     $user -> save();
 
@@ -222,8 +229,10 @@ if($user->Token === $token && Carbon::now()<=$user->TokenExpire){
         "FullName" => $user->FullName,
         "UserId" => $user->UserId,
         "profilePic" => $user->profilePic,
-        
-    ];
+        "Role"=> $user->Role,
+        "ServerId" => $user -> ServerId,
+
+ ];
 
     return response()->json(["message" => $c], 200);
 }
@@ -241,7 +250,52 @@ else{
 }
 
 
+function Logout($SeverId){
+    $user = Authentication::where('ServerId', $ServerId)->first();
+    if($user==null){
+        return response()->json(["message"=>"User does not exist"],400);
+    }
 
+
+    $user -> ServerId = null;
+
+    $saver = $user->save();
+
+    if($saver){
+        return response()->json(["message"=>"User logged out"],200);
+    }
+    else{
+        return response()->json(["message"=>"Error logging out"],400);
+    }
+
+
+}
+
+function Connection(Request $req){
+
+    $user = Authentication::where('ServerId', $req->ServerId)->first();
+    if($user==null){
+        return response()->json(["message"=>"User does not exist"],400);
+    }
+
+    return response()->json(["message"=>"Bingo"],200);
+
+
+}
+
+
+
+function TokenGenerator(): string {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$^&*()_+{}|<>-=[],.';
+        $length = 30;
+        $randomString = '';
+    
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+    
+        return $randomString;
+    }
 
 
 

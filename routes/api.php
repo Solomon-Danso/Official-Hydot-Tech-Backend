@@ -238,7 +238,10 @@ Route::post("CreateChampion/{userId}",[ChampionController::class,'CreateChampion
 Route::post("GetChampion/{token}",[ChampionController::class,'GetChampion']);
 Route::post("TestChampion/{token}",[ChampionController::class,'TestChampion']);
 
+//New Additions Here 
 
+Route::post("Logout/{SeverId}",[AuthenticationController::class,'Logout']);
+Route::post("Connection",[AuthenticationController::class,'Connection']);
 
 
 
