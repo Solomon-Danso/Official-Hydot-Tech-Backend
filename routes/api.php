@@ -21,7 +21,7 @@ use App\Http\Controllers\PSavingController;
 use App\Http\Controllers\PConfigController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectCodeController;
-use App\Http\Controllers\ChampionController;
+
 use App\Http\Controllers\LocalServer;
 
 
@@ -34,6 +34,19 @@ use App\Http\Controllers\LocalServer;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post("CreateClientApiServerURL",[ClientController::class,'CreateClientApiServerURL']);
+Route::post("UpdateClientApiServerURL",[ClientController::class,'UpdateClientApiServerURL']);
+Route::post("ViewClientApiServerURL",[ClientController::class,'ViewClientApiServerURL']);
+Route::post("DeleteClientApiServerURL",[ClientController::class,'DeleteClientApiServerURL']);
+Route::get("ViewAllClientApiServerURL",[ClientController::class,'ViewAllClientApiServerURL']);
+Route::post("BulkRegisterClientApiServerURL",[ClientController::class,'BulkRegisterClientApiServerURL']);
+
+
+
+
+
 
 
 Route::post("LocalRegisterCompany",[LocalServer::class,'LocalRegisterCompany']);
@@ -161,6 +174,7 @@ Route::get("TopFiveMostViewedName",[ProjectCodeController::class,'TopFiveMostVie
 Route::get("TopFiveMostViewedValue",[ProjectCodeController::class,'TopFiveMostViewedValue']);
 Route::get("TopFiveMostPayedName",[ProjectCodeController::class,'TopFiveMostPayedName']);
 Route::get("TopFiveMostPayedValue",[ProjectCodeController::class,'TopFiveMostPayedValue']);
+
 Route::get("GetAuditTrial",[ClientController::class,'GetAuditTrial']);
 Route::get("GetTodayAuditTrial",[ClientController::class,'GetTodayAuditTrial']);
 Route::post("CompanySetUp",[ClientController::class,'CompanySetUp']);
@@ -231,12 +245,6 @@ Route::post("UpdateProject/{id}",[ProjectCodeController::class,'UpdateProject'])
 Route::delete("DeleteProject/{id}",[ProjectCodeController::class,'DeleteProject']);
 Route::get("AllProject",[ProjectCodeController::class,'AllProject']);
 
-
-
-Route::post("CreateChampion/{userId}",[ChampionController::class,'CreateChampion']);
-
-Route::post("GetChampion/{token}",[ChampionController::class,'GetChampion']);
-Route::post("TestChampion/{token}",[ChampionController::class,'TestChampion']);
 
 //New Additions Here 
 
